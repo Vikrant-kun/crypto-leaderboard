@@ -50,7 +50,7 @@ https://github.com/Vikrant-kun/crypto-leaderboard-backend
 
 ## Activity Feed
 
-<img width="842" height="1554" alt="feed" src="https://github.com/user-attachments/assets/1dc7609b-f7ae-4202-9d38-f32aa5643be6" />
+<img width="842" height="1554" alt="feed" src="https://github.com/user-attachments/assets/25cbccdb-7b62-4552-acc2-863ce0f9e2e5" />
 
 
 ---

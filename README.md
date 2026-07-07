@@ -1,4 +1,4 @@
-# Crypto Leaderboard
+<img width="842" height="1554" alt="feed" src="https://github.com/user-attachments/assets/2bb71069-2d7e-40df-ba74-15df19dd418c" /># Crypto Leaderboard
 
 A full-stack real-time leaderboard system built with **Go**, **Redis**, **PostgreSQL**, **WebSockets**, and **Next.js**.
 
@@ -35,81 +35,37 @@ https://github.com/Vikrant-kun/crypto-leaderboard-backend
 
 ## Dashboard
 
-> *(Insert dashboard screenshot here)*
+<img width="1440" height="819" alt="hero" src="https://github.com/user-attachments/assets/78615cba-2e63-4225-8a8a-c4db482cf0f4" />
+
+
 
 ---
 
 ## Live Updates
 
-> *(Insert GIF showing live leaderboard updates)*
+<img width="831" height="816" alt="leaderboard" src="https://github.com/user-attachments/assets/756cb820-3bf8-4ec5-b23c-8387fe539d4f" />
+
 
 ---
 
 ## Activity Feed
 
-> *(Insert GIF showing activity feed animations)*
+<img width="842" height="1554" alt="feed" src="https://github.com/user-attachments/assets/1dc7609b-f7ae-4202-9d38-f32aa5643be6" />
+
 
 ---
 
 # System Architecture
 
-> *(Insert architecture diagram here)*
+<img width="1027" height="342" alt="architecture" src="https://github.com/user-attachments/assets/d2b6a2ae-cc2b-49da-8be0-186b5e7dee19" />
 
-```
-                  Browser
-
-                     │
-
-          REST + WebSocket
-
-                     │
-
-             Go Backend Server
-
-       ┌─────────────┴─────────────┐
-
-       │                           │
-
-Redis Sorted Set            PostgreSQL
-
-Ranking Engine          Persistent Storage
-```
 
 ---
 
 # Request Flow
 
-```
-User opens dashboard
+<img width="1031" height="332" alt="request-flow" src="https://github.com/user-attachments/assets/8a15c415-a904-46cc-8a59-797a6afb225b" />
 
-        │
-
-        ▼
-
-GET /api/leaderboard
-
-        │
-
-Initial leaderboard snapshot
-
-        │
-
-        ▼
-
-Open WebSocket connection
-
-        │
-
-        ▼
-
-Receive live updates
-
-        │
-
-        ▼
-
-Animated UI refresh
-```
 
 ---
 

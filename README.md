@@ -1,4 +1,4 @@
-<img width="842" height="1554" alt="feed" src="https://github.com/user-attachments/assets/2bb71069-2d7e-40df-ba74-15df19dd418c" /># Crypto Leaderboard
+<img width="842" height="1554" alt="feed" src="https://github.com/user-attachments/assets/2bb71069-2d7e-40df-ba74-15df19dd418c" /> Crypto Leaderboard
 
 A full-stack real-time leaderboard system built with **Go**, **Redis**, **PostgreSQL**, **WebSockets**, and **Next.js**.
 
@@ -35,7 +35,7 @@ https://github.com/Vikrant-kun/crypto-leaderboard-backend
 
 ## Dashboard
 
-<img width="1440" height="819" alt="hero" src="https://github.com/user-attachments/assets/78615cba-2e63-4225-8a8a-c4db482cf0f4" />
+<img width="1000" height="600" alt="hero" src="https://github.com/user-attachments/assets/78615cba-2e63-4225-8a8a-c4db482cf0f4" />
 
 
 
@@ -50,7 +50,7 @@ https://github.com/Vikrant-kun/crypto-leaderboard-backend
 
 ## Activity Feed
 
-<img width="842" height="1554" alt="feed" src="https://github.com/user-attachments/assets/25cbccdb-7b62-4552-acc2-863ce0f9e2e5" />
+<img width="842" height="500" alt="feed" src="https://github.com/user-attachments/assets/25cbccdb-7b62-4552-acc2-863ce0f9e2e5" />
 
 
 ---
@@ -71,45 +71,7 @@ https://github.com/Vikrant-kun/crypto-leaderboard-backend
 
 # Score Update Flow
 
-```
-Score Generated
-
-        │
-
-        ▼
-
-Update PostgreSQL
-
-        │
-
-        ▼
-
-Update Redis Sorted Set
-
-        │
-
-        ▼
-
-Retrieve latest rankings
-
-        │
-
-        ▼
-
-Broadcast leaderboard
-
-        │
-
-        ▼
-
-Broadcast activity event
-
-        │
-
-        ▼
-
-Frontend updates instantly
-```
+<img width="1024" height="1536" alt="Flow-request" src="https://github.com/user-attachments/assets/b89a9c11-4b3f-476d-b4b1-0c4a71ab4bc8" />
 
 ---
 

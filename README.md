@@ -1,129 +1,112 @@
-Crypto Leaderboard
+<div align="center">
 
-A full-stack real-time leaderboard system built with **Go**, **Redis**, **PostgreSQL**, **WebSockets**, and **Next.js**.
+# Crypto Leaderboard
 
-This project demonstrates how modern real-time systems can maintain low-latency leaderboards by combining Redis Sorted Sets with persistent PostgreSQL storage while broadcasting updates to connected clients over WebSockets.
+A full-stack real-time leaderboard system built with Go, Redis, PostgreSQL, WebSockets, and Next.js.
 
-Rather than continuously polling the server, clients maintain a persistent WebSocket connection and receive leaderboard updates instantly whenever player scores change.
+[![Go](https://img.shields.io/badge/Go-1.22-00ADD8?style=flat-square&logo=go&logoColor=white)](https://go.dev/)
+[![Next.js](https://img.shields.io/badge/Next.js-14-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Redis](https://img.shields.io/badge/Redis-7-DC382D?style=flat-square&logo=redis&logoColor=white)](https://redis.io/)
+[![WebSocket](https://img.shields.io/badge/Protocol-WebSocket-4A90D9?style=flat-square)](https://datatracker.ietf.org/doc/html/rfc6455)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+
+</div>
 
 ---
 
 ## Overview
 
-The project consists of two independent repositories:
+Crypto Leaderboard maintains a low-latency, real-time ranking system by combining Redis Sorted Sets for fast in-memory ranking with PostgreSQL for durable storage, broadcasting every change to connected clients over a persistent WebSocket connection instead of relying on client-side polling.
 
-| Repository | Description |
-|------------|-------------|
-| **Frontend** | Next.js dashboard with animated leaderboard, podium, avatars and live activity feed |
-| **Backend** | Go server responsible for score simulation, ranking, persistence and WebSocket broadcasting |
+The project is split into two independent repositories:
 
-Frontend Repository
-
-```
-https://github.com/Vikrant-kun/crypto-leaderboard-frontend
-```
-
-Backend Repository
-
-```
-https://github.com/Vikrant-kun/crypto-leaderboard-backend
-```
+| Repository | Description | Link |
+|---|---|---|
+| Frontend | Next.js dashboard with animated leaderboard, podium, avatars, and live activity feed | [crypto-leaderboard-frontend](https://github.com/Vikrant-kun/crypto-leaderboard-frontend) |
+| Backend | Go server handling score simulation, ranking, persistence, and WebSocket broadcasting | [crypto-leaderboard-backend](https://github.com/Vikrant-kun/crypto-leaderboard-backend) |
 
 ---
 
-# Demonstration
+## Demonstration
 
-## Dashboard
+### Dashboard
 
-<img width="1000" height="600" alt="hero" src="https://github.com/user-attachments/assets/78615cba-2e63-4225-8a8a-c4db482cf0f4" />
+<p align="center">
+  <img width="720" alt="Dashboard overview" src="https://github.com/user-attachments/assets/78615cba-2e63-4225-8a8a-c4db482cf0f4" />
+</p>
 
+### Live Updates
 
+<p align="center">
+  <img width="600" alt="Live leaderboard updates" src="https://github.com/user-attachments/assets/756cb820-3bf8-4ec5-b23c-8387fe539d4f" />
+</p>
 
----
+### Activity Feed
 
-## Live Updates
-
-<img width="831" height="816" alt="leaderboard" src="https://github.com/user-attachments/assets/756cb820-3bf8-4ec5-b23c-8387fe539d4f" />
-
-
----
-
-## Activity Feed
-
-<img width="350" height="500" alt="feed" src="https://github.com/user-attachments/assets/25cbccdb-7b62-4552-acc2-863ce0f9e2e5" />
-
+<p align="center">
+  <img width="320" alt="Live activity feed" src="https://github.com/user-attachments/assets/25cbccdb-7b62-4552-acc2-863ce0f9e2e5" />
+</p>
 
 ---
 
-# System Architecture
+## System Architecture
 
-<img width="1027" height="342" alt="architecture" src="https://github.com/user-attachments/assets/d2b6a2ae-cc2b-49da-8be0-186b5e7dee19" />
+<p align="center">
+  <img width="720" alt="System architecture diagram" src="https://github.com/user-attachments/assets/d2b6a2ae-cc2b-49da-8be0-186b5e7dee19" />
+</p>
 
+## Request Flow
+
+<p align="center">
+  <img width="720" alt="Request flow diagram" src="https://github.com/user-attachments/assets/8a15c415-a904-46cc-8a59-797a6afb225b" />
+</p>
+
+## Score Update Flow
+
+<p align="center">
+  <img width="420" alt="Score update flow diagram" src="https://github.com/user-attachments/assets/b89a9c11-4b3f-476d-b4b1-0c4a71ab4bc8" />
+</p>
 
 ---
 
-# Request Flow
+## Design Decisions
 
-<img width="1031" height="332" alt="request-flow" src="https://github.com/user-attachments/assets/8a15c415-a904-46cc-8a59-797a6afb225b" />
+### Why Redis
 
-
----
-
-# Score Update Flow
-
-<img width="1024" height="1536" alt="Flow-request" src="https://github.com/user-attachments/assets/b89a9c11-4b3f-476d-b4b1-0c4a71ab4bc8" />
-
----
-
-# Why Redis?
-
-The leaderboard is maintained using Redis Sorted Sets instead of SQL ordering.
-
-Redis provides:
+The leaderboard is maintained using Redis Sorted Sets instead of SQL-based ordering.
 
 - O(log N) score updates
-- Efficient ranking queries
-- Extremely low latency
-- In-memory performance
+- Efficient ranking and range queries
+- In-memory performance with sub-millisecond latency
+- Avoids re-sorting relational records on every score change
 
-This avoids repeatedly sorting relational database records every time a score changes.
+### Why PostgreSQL
 
----
-
-# Why PostgreSQL?
-
-Redis is optimized for speed, not durability.
-
-PostgreSQL serves as the persistent source of truth by storing:
+Redis is optimized for speed, not durability. PostgreSQL is the persistent source of truth, storing:
 
 - Player ID
 - Username
 - Score
-- Update timestamp
+- Last updated timestamp
 
-This separation allows Redis to focus exclusively on ranking while PostgreSQL guarantees persistence.
+This split lets Redis focus exclusively on ranking while PostgreSQL guarantees data durability.
 
----
+### Why WebSockets
 
-# Why WebSockets?
+Polling introduces unnecessary requests and update delay. The frontend instead holds a persistent WebSocket connection, and the backend pushes two events on every score change:
 
-Traditional polling introduces unnecessary requests and delays.
-
-Instead, the frontend maintains a persistent WebSocket connection.
-
-Whenever a score changes, the backend immediately broadcasts:
-
-- Updated leaderboard
+- Updated leaderboard state
 - Live activity event
 
-Every connected client receives the update in real time.
+Every connected client receives the update immediately, with no client-initiated requests.
 
 ---
 
-# Features
+## Features
 
-## Frontend
-
+**Frontend**
 - Animated podium
 - Real-time leaderboard
 - Live activity feed
@@ -133,10 +116,7 @@ Every connected client receives the update in real time.
 - Dynamic avatars
 - Connection status indicator
 
----
-
-## Backend
-
+**Backend**
 - Go HTTP server
 - Gorilla WebSocket
 - Redis Sorted Sets
@@ -149,10 +129,10 @@ Every connected client receives the update in real time.
 
 ---
 
-# Technology Stack
+## Technology Stack
 
 | Layer | Technology |
-|---------|------------|
+|---|---|
 | Frontend | Next.js |
 | UI | React |
 | Language | TypeScript |
@@ -165,45 +145,37 @@ Every connected client receives the update in real time.
 
 ---
 
-# Project Structure
-
-```
-crypto-leaderboard/
-
-README.md
-
-assets/
-
-frontend/
-
-backend/
-```
-
-Frontend and backend are maintained as separate repositories.
-
----
-
-# Performance
+## Performance
 
 | Operation | Complexity |
-|------------|------------|
+|---|---|
 | Redis score update | O(log N) |
 | Rank lookup | O(log N) |
-| Top N leaderboard | O(log N + M) |
+| Top-N leaderboard | O(log N + M) |
 | PostgreSQL update | O(1) |
 | WebSocket broadcast | O(C) |
 
-Where:
-
-- **N** = total players
-- **M** = leaderboard size requested
-- **C** = connected clients
+Where **N** = total players, **M** = requested leaderboard size, **C** = connected clients.
 
 ---
 
-# Running Locally
+## Project Structure
 
-## Backend
+```
+crypto-leaderboard/
+├── README.md
+├── assets/
+├── frontend/          # crypto-leaderboard-frontend (separate repo)
+└── backend/           # crypto-leaderboard-backend (separate repo)
+```
+
+Frontend and backend are maintained as separate repositories and linked above.
+
+---
+
+## Running Locally
+
+### Backend
 
 ```bash
 git clone https://github.com/Vikrant-kun/crypto-leaderboard-backend
@@ -212,15 +184,9 @@ go mod tidy
 go run main.go
 ```
 
-Backend runs on
+Runs on `localhost:8080`
 
-```
-localhost:8080
-```
-
----
-
-## Frontend
+### Frontend
 
 ```bash
 git clone https://github.com/Vikrant-kun/crypto-leaderboard-frontend
@@ -229,15 +195,17 @@ npm install
 npm run dev
 ```
 
-Frontend runs on
-
-```
-localhost:3000
-```
+Runs on `localhost:3000`
 
 ---
 
-# Future Improvements
+## Note on the Score Simulator
+
+This project includes a built-in score simulator that periodically updates random player scores. It exists to demonstrate the real-time architecture. In production, score updates would originate from actual game events, trading systems, or external services.
+
+---
+
+## Future Improvements
 
 - Redis Pub/Sub
 - Docker Compose
@@ -247,34 +215,20 @@ localhost:3000
 - Prometheus metrics
 - Grafana dashboards
 - Rate limiting
-- Unit testing
-- Integration testing
+- Unit and integration testing
 - Horizontal scaling
 - Multiple leaderboard categories
 - Tournament support
 
 ---
 
-# Note
-
-This project includes a built-in score simulator that periodically updates random player scores.
-
-The simulator exists to demonstrate the real-time architecture. In a production environment, score updates would originate from actual game events, trading systems, or external services.
-
----
-
-# Author
+## Author
 
 **Vikrant**
-
-GitHub
-
-```
-https://github.com/Vikrant-kun
-```
+[GitHub — @Vikrant-kun](https://github.com/Vikrant-kun)
 
 ---
 
-# License
+## License
 
-MIT License
+Distributed under the MIT License.

@@ -1,4 +1,4 @@
-<img width="842" height="1554" alt="feed" src="https://github.com/user-attachments/assets/2bb71069-2d7e-40df-ba74-15df19dd418c" /> Crypto Leaderboard
+<img width="842" height="1554" alt="feed" src="https://github.com/user-attachments/assets/2bb71069-2d7e-40df-ba74-15df19dd418c" /># Crypto Leaderboard
 
 A full-stack real-time leaderboard system built with **Go**, **Redis**, **PostgreSQL**, **WebSockets**, and **Next.js**.
 
